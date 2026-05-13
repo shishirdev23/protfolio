@@ -1,0 +1,237 @@
+:root {
+    --split-pos: 50%;
+    --bg-designer: #ffffff;
+    --bg-coder: #f9f9f9;
+    --accent-color: #00d2ff;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    overflow-x: hidden;
+    /* Subtle noise texture */
+    background-image: url('https://www.transparenttextures.com/patterns/pinstriped-suit.png');
+}
+
+/* --- PRO-LEVEL HERO SECTION --- */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #ffffff;
+    cursor: ew-resize;
+}
+
+.hero-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.designer-side {
+    background-color: #ffffff;
+    z-index: 1;
+}
+
+.coder-side {
+    background-color: #f9f9f9;
+    z-index: 2;
+    /* High-performance clip-path masking */
+    clip-path: polygon(var(--split-pos, 50%) 0, 100% 0, 100% 100%, var(--split-pos, 50%) 100%);
+    transition: clip-path 0.05s ease-out;
+}
+
+.hero-title-text {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(3rem, 10vw, 7.5rem);
+    font-weight: 900;
+    text-transform: lowercase;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: -3px; /* Tight spacing for that "Pro" look */
+    opacity: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 10px;
+    opacity: 0.6;
+    font-family: 'Poppins', sans-serif;
+}
+
+.designer-text {
+    left: 5%;
+    color: #111;
+    z-index: 10;
+    filter: brightness(calc(0.5 + (var(--split-pos-val, 50) / 100)));
+    animation: heroIntroLeft 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.8s;
+}
+
+.coder-text {
+    right: 5%;
+    color: #111;
+    z-index: 5;
+    filter: brightness(calc(1.5 - (var(--split-pos-val, 50) / 100)));
+    animation: heroIntroRight 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 1s;
+}
+
+.bracket { font-family: 'Poppins', sans-serif; font-weight: 300; opacity: 0.5; font-size: 0.8em; vertical-align: middle; }
+
+.image-container {
+    position: relative;
+    width: 500px;
+    height: 700px;
+    z-index: 20;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.95);
+    animation: heroImgFade 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.3s;
+}
+
+.img-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.designer-img-wrapper {
+    z-index: 21;
+    filter: grayscale(1) contrast(1.1) sepia(0.2); /* Artistic look */
+}
+
+.coder-img-wrapper {
+    z-index: 22;
+    clip-path: polygon(var(--split-pos, 50%) 0, 100% 0, 100% 100%, var(--split-pos, 50%) 100%);
+    transition: clip-path 0.05s ease-out;
+}
+
+.img-layer img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Subtle Parallax Effect */
+    transform: translateX(calc((var(--split-pos-val) - 50) * -0.2px)) translateY(calc((var(--scroll-y, 0) * 0.1px)));
+    transition: transform 0.1s ease-out;
+}
+
+.divider {
+    position: absolute;
+    top: 0;
+    left: var(--split-pos, 50%);
+    width: 1px; /* Thinner line */
+    height: 100%;
+    background: #ffffff;
+    z-index: 30;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: left 0.05s ease-out;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.5s;
+}
+
+/* --- INTRO KEYFRAMES --- */
+@keyframes heroIntroLeft {
+    from { opacity: 0; transform: translate(-50px, -50%); }
+    to { opacity: 1; transform: translate(0, -50%); }
+}
+@keyframes heroIntroRight {
+    from { opacity: 0; transform: translate(50px, -50%); }
+    to { opacity: 1; transform: translate(0, -50%); }
+}
+@keyframes heroImgFade {
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* --- CONTENT SECTIONS --- */
+.content-section {
+    padding: 100px 0;
+    background-color: #ffffff;
+}
+
+.skill-card {
+    background: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    padding: 35px 20px;
+    transition: all 0.4s ease;
+    text-align: center;
+    color: #1a1a1a;
+}
+
+.skill-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.project-card {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #eee;
+    transition: all 0.4s ease;
+    color: #1a1a1a;
+}
+
+.project-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.project-card img { width: 100%; height: 220px; object-fit: cover; }
+
+.navbar {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 10000;
+}
+
+.navbar-dark .navbar-nav .nav-link { color: #333 !important; }
+.navbar-dark .navbar-brand { color: #111 !important; }
+.nav-link.active { color: #00d2ff !important; font-weight: 700; }
+
+#preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #ffffff; z-index: 9999; display: flex;
+    flex-direction: column; justify-content: center; align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+#preloader.fade-out { opacity: 0; visibility: hidden; }
+#preloader div { color: #111 !important; }
+
+@media (max-width: 768px) {
+    .hero-section { height: auto; padding: 120px 0 60px; flex-direction: column; cursor: default; }
+    .image-container { width: 280px; height: 400px; margin: 40px 0; }
+    .img-layer img { width: 280px; }
+    .divider { display: none; }
+    .hero-title-text { position: relative; top: 0; transform: none; width: 100%; text-align: center; display: block; margin: 10px 0; font-size: 3rem; }
+}
